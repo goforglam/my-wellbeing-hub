@@ -128,3 +128,21 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+
+## Supabase setup
+
+This app is designed for the dedicated Supabase project wbtzzutvfhiqyyujbhfm.
+
+Set these environment variables in your local environment or deployment platform:
+
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_PUBLISHABLE_KEY
+
+Use the Supabase publishable key only. Never commit service-role keys, database passwords, or other server secrets.
+
+Authentication uses email/password Supabase Auth. Personal rows are protected by Row Level Security and scoped to the authenticated user's id.
+
+### Vercel
+
+Import the goforglam/my-wellbeing-hub repository into Vercel, add the two VITE_* variables to the Production and Preview environments, then deploy. After the first deployment, add the Vercel URL to Supabase Authentication → URL Configuration as the Site URL / allowed redirect URL.
