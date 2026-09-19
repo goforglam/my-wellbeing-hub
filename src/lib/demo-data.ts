@@ -171,6 +171,7 @@ export function generateDemoData(): AppData {
         id: uid(),
         user_id: DEMO_USER_ID,
         date,
+        working_hours: working,
         meeting_hours: meetings,
         deep_work_hours: deep,
         admin_hours: round1(rng() * 1.8),

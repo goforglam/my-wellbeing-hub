@@ -58,7 +58,7 @@ function mapCheckin(r: any): DailyCheckin {
 
 function mapWork(r: any): WorkLog {
   return {
-    id: r.id, user_id: r.user_id, date: r.log_date, meeting_hours: n(r.meeting_hours),
+    id: r.id, user_id: r.user_id, date: r.log_date, working_hours: n(r.working_hours), meeting_hours: n(r.meeting_hours),
     deep_work_hours: n(r.deep_work_hours), admin_hours: n(r.admin_hours), urgent_unplanned_hours: n(r.urgent_hours),
     tasks_completed: n(r.tasks_completed), tasks_carried_over: n(r.tasks_carried_over), notes: "",
     created_at: r.created_at, updated_at: r.updated_at,
@@ -100,7 +100,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       }
 
       const userId = session.user.id;
-      const displayName = (session.user.user_metadata?.display_name as string | undefined) || session.user.email?.split("@")[0] || "You";
+      const displayName = (session.user.user_metadata?.["display_name"] as string | undefined) || session.user.email?.split("@")[0] || "You";
 
       const [profileRes, prefRes, checkinsRes, emotionsRes, workRes, wellbeingRes, reflectionsRes] = await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
@@ -188,11 +188,11 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const saveWorkLog = useCallback<StoreValue["saveWorkLog"]>((date, patch) => {
     const userId = session?.user?.id ?? DEMO_USER_ID;
     const existing = data.workLogs.find((w) => w.date === date);
-    const base: WorkLog = existing ?? { id: uid(), user_id: userId, date, meeting_hours: 0, deep_work_hours: 0, admin_hours: 0, urgent_unplanned_hours: 0, tasks_completed: 0, tasks_carried_over: 0, notes: "", created_at: now(), updated_at: now() };
+    const base: WorkLog = existing ?? { id: uid(), user_id: userId, date, working_hours: 0, meeting_hours: 0, deep_work_hours: 0, admin_hours: 0, urgent_unplanned_hours: 0, tasks_completed: 0, tasks_carried_over: 0, notes: "", created_at: now(), updated_at: now() };
     const next = { ...base, ...patch, date, user_id: userId, updated_at: now() };
     setData((prev) => ({ ...prev, isDemo: false, workLogs: existing ? prev.workLogs.map((w) => w.date === date ? next : w) : [...prev.workLogs, next] }));
     if (supabase && session?.user) void supabase.from("work_logs").upsert({
-      user_id: userId, log_date: date, working_hours: patch.working_hours ?? 0, meeting_hours: next.meeting_hours,
+      user_id: userId, log_date: date, working_hours: next.working_hours, meeting_hours: next.meeting_hours,
       deep_work_hours: next.deep_work_hours, admin_hours: next.admin_hours, urgent_hours: next.urgent_unplanned_hours,
       tasks_completed: next.tasks_completed, tasks_carried_over: next.tasks_carried_over,
     }, { onConflict: "user_id,log_date" });

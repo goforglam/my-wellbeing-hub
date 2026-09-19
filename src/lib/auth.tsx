@@ -66,30 +66,14 @@ export function useAuth() {
 export function AuthGate({ children }: { children: ReactNode }) {
   const { session, loading } = useAuth();
 
-  if (!hasSupabaseConfig) return <ConfigurationScreen />;
+  // Until the dedicated database is connected, run locally with demo data.
+  if (!hasSupabaseConfig) return <>{children}</>;
   if (loading) return <LoadingScreen />;
   if (!session) return <AuthScreen />;
 
   return <>{children}</>;
 }
 
-function ConfigurationScreen() {
-  return (
-    <Centered>
-      <Card className="surface w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Connect your private database</CardTitle>
-          <CardDescription>
-            Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY to the deployment environment.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="text-sm text-muted-foreground">
-          No personal data is stored until the app is connected to the dedicated Supabase project.
-        </CardContent>
-      </Card>
-    </Centered>
-  );
-}
 
 function LoadingScreen() {
   return (
