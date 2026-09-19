@@ -99,6 +99,7 @@ export interface WorkLog {
   id: UUID;
   user_id: UUID;
   date: ISODate;
+  working_hours: number;
   meeting_hours: number;
   deep_work_hours: number;
   admin_hours: number;
