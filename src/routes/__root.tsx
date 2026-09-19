@@ -130,6 +130,7 @@ function RootComponent() {
           </StoreProvider>
         </AuthGate>
       </AuthProvider>
+      <Toaster />
     </QueryClientProvider>
   );
 }
