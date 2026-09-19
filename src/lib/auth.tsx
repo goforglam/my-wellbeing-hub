@@ -66,7 +66,8 @@ export function useAuth() {
 export function AuthGate({ children }: { children: ReactNode }) {
   const { session, loading } = useAuth();
 
-  if (!hasSupabaseConfig) return <ConfigurationScreen />;
+  // Until the dedicated database is connected, run locally with demo data.
+  if (!hasSupabaseConfig) return <>{children}</>;
   if (loading) return <LoadingScreen />;
   if (!session) return <AuthScreen />;
 
