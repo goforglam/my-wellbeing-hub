@@ -11,6 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as EmotionsRouteImport } from './routes/emotions'
+import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as WeeklyReviewRouteImport } from './routes/weekly-review'
+import { Route as WellbeingRouteImport } from './routes/wellbeing'
+import { Route as WorkRouteImport } from './routes/work'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +28,110 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EmotionsRoute = EmotionsRouteImport.update({
+  id: '/emotions',
+  path: '/emotions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyReviewRoute = WeeklyReviewRouteImport.update({
+  id: '/weekly-review',
+  path: '/weekly-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WellbeingRoute = WellbeingRouteImport.update({
+  id: '/wellbeing',
+  path: '/wellbeing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/emotions': typeof EmotionsRoute
+  '/insights': typeof InsightsRoute
+  '/settings': typeof SettingsRoute
+  '/weekly-review': typeof WeeklyReviewRoute
+  '/wellbeing': typeof WellbeingRoute
+  '/work': typeof WorkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/emotions': typeof EmotionsRoute
+  '/insights': typeof InsightsRoute
+  '/settings': typeof SettingsRoute
+  '/weekly-review': typeof WeeklyReviewRoute
+  '/wellbeing': typeof WellbeingRoute
+  '/work': typeof WorkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/emotions': typeof EmotionsRoute
+  '/insights': typeof InsightsRoute
+  '/settings': typeof SettingsRoute
+  '/weekly-review': typeof WeeklyReviewRoute
+  '/wellbeing': typeof WellbeingRoute
+  '/work': typeof WorkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/emotions'
+    | '/insights'
+    | '/settings'
+    | '/weekly-review'
+    | '/wellbeing'
+    | '/work'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/emotions'
+    | '/insights'
+    | '/settings'
+    | '/weekly-review'
+    | '/wellbeing'
+    | '/work'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/emotions'
+    | '/insights'
+    | '/settings'
+    | '/weekly-review'
+    | '/wellbeing'
+    | '/work'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  EmotionsRoute: typeof EmotionsRoute
+  InsightsRoute: typeof InsightsRoute
+  SettingsRoute: typeof SettingsRoute
+  WeeklyReviewRoute: typeof WeeklyReviewRoute
+  WellbeingRoute: typeof WellbeingRoute
+  WorkRoute: typeof WorkRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +150,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/emotions': {
+      id: '/emotions'
+      path: '/emotions'
+      fullPath: '/emotions'
+      preLoaderRoute: typeof EmotionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly-review': {
+      id: '/weekly-review'
+      path: '/weekly-review'
+      fullPath: '/weekly-review'
+      preLoaderRoute: typeof WeeklyReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wellbeing': {
+      id: '/wellbeing'
+      path: '/wellbeing'
+      fullPath: '/wellbeing'
+      preLoaderRoute: typeof WellbeingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  EmotionsRoute: EmotionsRoute,
+  InsightsRoute: InsightsRoute,
+  SettingsRoute: SettingsRoute,
+  WeeklyReviewRoute: WeeklyReviewRoute,
+  WellbeingRoute: WellbeingRoute,
+  WorkRoute: WorkRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
