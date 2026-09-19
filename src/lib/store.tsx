@@ -58,7 +58,7 @@ function mapCheckin(r: any): DailyCheckin {
 
 function mapWork(r: any): WorkLog {
   return {
-    id: r.id, user_id: r.user_id, date: r.log_date, meeting_hours: n(r.meeting_hours),
+    id: r.id, user_id: r.user_id, date: r.log_date, working_hours: n(r.working_hours), meeting_hours: n(r.meeting_hours),
     deep_work_hours: n(r.deep_work_hours), admin_hours: n(r.admin_hours), urgent_unplanned_hours: n(r.urgent_hours),
     tasks_completed: n(r.tasks_completed), tasks_carried_over: n(r.tasks_carried_over), notes: "",
     created_at: r.created_at, updated_at: r.updated_at,
